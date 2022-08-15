@@ -7,7 +7,7 @@ import javax.json.Json;
 import javax.json.JsonObject;
 
 public class PeerThread extends Thread {
-    java.io.InputStreamReader;
+
     private BufferedReader bufferedReader;
     public PeerThread (Socket socket) throws IOException {
         bufferedReader = new BufferedReader (new InputStreamReader(socket.getInputStream()));
