@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.Socket;
+import javax.json.Json;
 
 
 public class Peer {
@@ -45,7 +46,7 @@ public class Peer {
                     updateListenToPeers(bufferedReader, username, serverThread);
                 } else {
                     StringWriter stringWriter = new StringWriter();
-                    Json.createwriter(stringWriter).writeObject(Json.createObjectBuilder()
+                    Json.createWriter(stringWriter).writeObject(Json.createObjectBuilder()
                             .add("username", username)
                             .add("message", message)
                             .build());
