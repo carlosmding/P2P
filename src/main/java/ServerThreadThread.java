@@ -8,7 +8,7 @@ public class ServerThreadThread extends Thread {
 
     private ServerThread serverThread;
     private Socket socket;
-    private Printwriter printwriter;
+    private PrintWriter printwriter;
     public ServerThreadThread (Socket socket, ServerThread serverThread) {
         this.serverThread = serverThread;
         this.socket = socket;
@@ -18,8 +18,8 @@ public class ServerThreadThread extends Thread {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader (this.socket.getInputStream()));
             this.printwriter = new PrintWriter (socket.getOutputStream(), true);
             while(true) serverThread.sendMessage( bufferedReader.readLine());
-        } catch (Exception e) { serverThread.getServer ThreadThreads().remove(this); }
+        } catch (Exception e) { serverThread.getServerThreadThreads().remove(this); }
     }
 
-    public Printwriter getPrintwriter() { return printwriter; }
+    public PrintWriter getPrintWriter() { return printwriter; }
 }

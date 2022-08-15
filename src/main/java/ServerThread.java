@@ -10,17 +10,18 @@ public class ServerThread extends Thread {
     }
 
     public void run(){
-    try {
-        while (true) {
-            ServerThreadThread serverThread Thread = new ServerThread Thread (serverSocket.accept(), this);
-            serverThread Threads.add(server ThreadThread);
-            serverThreadThread.start();
-        } catch (Exception e) { e.printStackTrace(); }
-        void sendMessage(String message) {
-            try { serverThread Threads.forEach(t-> t.getPrintWriter().println(message));
-            } catch (Exception e) { e.printStackTrace(); }
-        }
-        public Set<Server Thread Thread> getServerThread Threads() { return serverThreadThreads; }
+        try {
+            while (true) {
+                ServerThreadThread serverThreadThread = new ServerThreadThread (serverSocket.accept(), this);
+                serverThreadThreads.add(serverThreadThread);
+                serverThreadThread.start();
+            }
+            }catch (Exception e) { e.printStackTrace(); }
     }
-}
+    void sendMessage(String message) {
+        try { serverThreadThreads.forEach(t-> t.getPrintWriter().println(message));
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+    public Set<ServerThreadThread> getServerThreadThreads() { return serverThreadThreads; }
+
 }

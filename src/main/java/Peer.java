@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.net.Socket;
 
 
@@ -28,39 +29,31 @@ public class Peer {
                 if (socket != null) socket.close();
                 else System.out.println("invalid input. skipping to next step.");
             }
-        }
+        } communicate (bufferedReader, username, serverThread);
+    }
 
-
-
-        communicate (bufferedReader, username, serverThread);
-
-        public void communicate (Buffered Reader buffered Reader, String username, ServerThread serverThread) {
-            try {
-                if (socket != null) socket.close();
-                else System.out.println("invalid input. skipping to next step.");
-                System.out.println("> you can now communicate (e to exit, c to change)");
-                boolean flag = true;
-                while(flag) {
-                    String message = buffered Reader.readLine();
-                }
+    public void communicate (BufferedReader bufferedReader, String username, ServerThread serverThread) {
+        try {
+            System.out.println("> you can now communicate (e to exit, c to change)");
+            boolean flag = true;
+            while(flag) {
+                String message = bufferedReader.readLine();
                 if (message.equals("e")) {
                     flag = false;
                     break;
                 } else if (message.equals("c")) {
-                    update ListenToPeers (buffered Reader, username, serverThread);
+                    updateListenToPeers(bufferedReader, username, serverThread);
                 } else {
                     StringWriter stringWriter = new StringWriter();
-                    Json.createwriter
-                            (stringwriter).writeObject(Json.createObjectBuilder()
+                    Json.createwriter(stringWriter).writeObject(Json.createObjectBuilder()
                             .add("username", username)
                             .add("message", message)
                             .build());
                     serverThread.sendMessage(stringWriter.toString());
-                    System.exit(0);
-                    }
-
-
                 }
-        }
+            }
+            System.exit(0);
+            }catch (Exception e){}
     }
+
 }
