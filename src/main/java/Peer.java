@@ -1,14 +1,14 @@
+import javax.json.Json;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.Socket;
-import javax.json.Json;
 
 
 public class Peer {
     public static void main(String[] args) throws Exception {
         BufferedReader bufferedReader = new BufferedReader (new InputStreamReader(System.in));
-        System.out.println("> ingrese su usuario & número de puerto separados por un espacio: ");
+        System.out.println("Ingrese su usuario y número de puerto separados por un espacio: ");
         String[] setupValues= bufferedReader.readLine().split(" ");
 
         ServerThread serverThread = new ServerThread (setupValues[1]);
@@ -16,8 +16,8 @@ public class Peer {
         new Peer().updateListenToPeers (bufferedReader, setupValues [0], serverThread);
     }
     public void updateListenToPeers (BufferedReader bufferedReader, String username, ServerThread serverThread) throws Exception {
-        System.out.println(">Ingrese los puertos de los usuario que desea recibir mensajes");
-        System.out.println(" Digite s para solo enviar mensajes: ");
+        System.out.println("Ingrese los puertos de los usuario con los que desea recibir mensajes");
+        System.out.println("Digite (s) para solo enviar mensajes: ");
         String input=bufferedReader.readLine();
         String[] inputValues = input.split(" ");
         if (!input.equals("s")) for (int i = 0; i <inputValues.length; i++) {
@@ -35,7 +35,7 @@ public class Peer {
 
     public void communicate (BufferedReader bufferedReader, String username, ServerThread serverThread) {
         try {
-            System.out.println("> Ahora puede establecer comunicación(e para salir, c para cambiar el usuario)");
+            System.out.println("Ya puede establecer comunicación; recuerd (e) para salir y (c) para cambiar los usuarios con los que desea comunicarse");
             boolean flag = true;
             while(flag) {
                 String message = bufferedReader.readLine();
@@ -47,8 +47,8 @@ public class Peer {
                 } else {
                     StringWriter stringWriter = new StringWriter();
                     Json.createWriter(stringWriter).writeObject(Json.createObjectBuilder()
-                            .add("Usuario", username)
-                            .add("Mensaje", message)
+                            .add("username", username)
+                            .add("message", message)
                             .build());
                     serverThread.sendMessage(stringWriter.toString());
                 }
