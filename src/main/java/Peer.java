@@ -20,17 +20,18 @@ public class Peer {
         System.out.println("Digite (s) para solo enviar mensajes: ");
         String input=bufferedReader.readLine();
         String[] inputValues = input.split(" ");
-        if (!input.equals("s")) for (int i = 0; i <inputValues.length; i++) {
-            String[] address = inputValues[i].split(":");
+        if (!input.equals("s")) for (String inputValue : inputValues) {
+            String[] address = inputValue.split(":");
             Socket socket = null;
             try {
-                socket = new Socket (address [0], Integer.valueOf(address [1]));
-                new PeerThread (socket).start();
+                socket = new Socket(address[0], Integer.valueOf(address[1]));
+                new PeerThread(socket).start();
             } catch (Exception e) {
                 if (socket != null) socket.close();
                 else System.out.println("Comando inválido.");
             }
-        } communicate (bufferedReader, username, serverThread);
+        }
+        communicate (bufferedReader, username, serverThread);
     }
 
     public void communicate (BufferedReader bufferedReader, String username, ServerThread serverThread) {
@@ -54,7 +55,9 @@ public class Peer {
                 }
             }
             System.exit(0);
-            }catch (Exception e){}
+            }catch (Exception e){
+                System.out.println("Error en enviar mensaje");
+            }
     }
 
 }
