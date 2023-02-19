@@ -8,7 +8,7 @@ import java.net.Socket;
 public class Peer {
     public static void main(String[] args) throws Exception {
         BufferedReader bufferedReader = new BufferedReader (new InputStreamReader(System.in));
-        System.out.println("Ingrese su usuario y número de puerto separados por un espacio: ");
+        System.out.println("Para iniciar, ingrese su usuario y número de puerto separados por un espacio: ");
         String[] setupValues= bufferedReader.readLine().split(" ");
 
         ServerThread serverThread = new ServerThread (setupValues[1]);
